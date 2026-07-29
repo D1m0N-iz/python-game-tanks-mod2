@@ -1,5 +1,7 @@
 class tank:
+    count = 0
     def __init__(self,x,y,fuel,hp,ammo = 30,model = 'ис 2'):
+        tank.count += 1
         self.model = self.model
         self.fuel = 100
         self.hp = 100
@@ -13,3 +15,6 @@ class tank:
             self.x = 0
         if self.y < 0:
             self.y = 0
+
+
+        def fire(self):
