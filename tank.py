@@ -2,7 +2,7 @@ class tank:
     count = 0
     SIZE = 100
 
-    def __init__(self, canvas, x, y, model='ис 2', ammo=30, speed=10):
+    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12):
         tank.count += 1
         self.canvas = canvas
         self.model = model

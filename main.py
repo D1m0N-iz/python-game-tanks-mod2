@@ -2,7 +2,7 @@ import tkinter as tk
 from tank import tank
 
 # Коды клавиш
-KEY_W, KEY_A, KEY_S, KEY_D = 87, 65, 83, 68
+KEY_W, KEY_A, KEY_S, KEY_D = 25, 38, 39, 40
 
 def key_press(event):
     if event.keycode == KEY_W:
