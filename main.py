@@ -2,16 +2,17 @@ import tkinter as tk
 from tank import tank
 
 # Коды клавиш
-KEY_W, KEY_A, KEY_S, KEY_D = 25, 38, 39, 40
+KEY_W_1, KEY_A_1, KEY_S_1, KEY_D_1 = 87, 65, 83, 68 # Кодировка ASCII
+KEY_W_2, KEY_A_2, KEY_S_2, KEY_D_2 = 25, 38, 39, 40 # Кодировка Linux
 
 def key_press(event):
-    if event.keycode == KEY_W:
+    if event.keycode == KEY_W_1 or event.keycode == KEY_W_2:
         player.forward()
-    elif event.keycode == KEY_A:
+    elif event.keycode == KEY_A_1 or event.keycode == KEY_A_2:
         player.left()
-    elif event.keycode == KEY_S:
+    elif event.keycode == KEY_S_1 or event.keycode == KEY_S_2:
         player.backward()
-    elif event.keycode == KEY_D:
+    elif event.keycode == KEY_D_1 or event.keycode == KEY_D_2:
         player.right()
     print(player)
 
