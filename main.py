@@ -1,5 +1,11 @@
 import tkinter as tk
 from tank import tank
+from hitbox import Hitbox
+
+hb1 = Hitbox(10,10,100,100)
+wid = hb1.get_widht
+hb1.set_width(wid * 2)
+print(hb1.get_widht())
 
 # Коды клавиш
 KEY_W_1, KEY_A_1, KEY_S_1, KEY_D_1 = 87, 65, 83, 68 # Кодировка ASCII
