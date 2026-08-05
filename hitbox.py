@@ -5,6 +5,9 @@ class Hitbox:
         self.set_width(width)
         self.set_height(height)
 
+    def __str__(self):
+        return f'__x={self.__x} __y={self.__y} __width={self.__widht} __height={self.__height}'
+
     def __get_widht(self):
         return self.__widht
     def __set_width(self,width):
