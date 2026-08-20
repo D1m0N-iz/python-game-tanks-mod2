@@ -1,9 +1,12 @@
+from hitbox import Hitbox
+
 class tank:
     count = 0
     SIZE = 100
 
     def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12):
         tank.count += 1
+        self.__hitbox = Hitbox(x,y,tank.SIZE,tank.SIZE)
         self.canvas = canvas
         self.model = model
         self.fuel = 1000 # Запас топлива
@@ -12,8 +15,8 @@ class tank:
         self.ammo = ammo
         self.speed = speed
 
-        self.x = x
-        self.y = y
+        self.__x = x
+        self.__y = y
 
         if self.x < 0:
             self.x = 0
@@ -42,6 +45,7 @@ class tank:
     def forward(self):
         if self.fuel > 0:
             self.y -= self.speed
+            self.__update_hitbox()
             self.fuel -= 1
             self.repaint()
 
@@ -62,3 +66,41 @@ class tank:
             self.x += self.speed
             self.fuel -= 1
             self.repaint()
+
+    def __update_hitbox(self):
+        self.__hitbox.moveto(self.x,self.y)
+
+    def intersects(self,other_tank):
+        return self.__hitbox.intersects(other_tank._hitbox)
+    
+    def get_x(self):
+        return self.__x
+    
+    def get_y(self):
+        return self.__y
+    
+    def get_model(self):
+        return self.__model
+    
+    def get_fuel(self):
+        return self.__fuel
+    
+    def get_hp(self):
+        return self.__hp
+    
+    def get_xp(self):
+        return self.__xp
+    
+    def get_ammo(self):
+        return self.__ammo
+    
+    def get_speed(self):
+        return self.__speed
+    
+    @staticmethod
+    def get_quantity():
+        return Tank.count
+    
+    @staticmethod
+    def get_size():
+        return Tank.SIZE

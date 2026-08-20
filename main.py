@@ -20,7 +20,12 @@ def key_press(event):
         player.backward()
     elif event.keycode == KEY_D_1 or event.keycode == KEY_D_2:
         player.right()
-    print(player)
+        
+    check_colision()
+
+def check_colision():
+    if player.intersects(enemy):
+        print('танки столкнулись')
 
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
