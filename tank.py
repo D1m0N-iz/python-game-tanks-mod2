@@ -1,10 +1,15 @@
+from tkinter import PhotoImage
 from hitbox import Hitbox
 
 class tank:
     count = 0
     SIZE = 100
 
-    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12):
+    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12,
+                 file_up = './img/tank_up.png'
+                  file_down = './img/tank_down.png',
+                  file_left = './img/tank_left.png',
+                  file_right = './img/tank_right.png'):
         tank.count += 1
         self.__hitbox = Hitbox(x,y,tank.SIZE,tank.SIZE)
         self.canvas = canvas
@@ -22,6 +27,11 @@ class tank:
             self.x = 0
         if self.y < 0:
             self.y = 0
+
+        self.skin_up = PhotoImage(file=file_up)
+        self.skin_down = PhotoImage(file=file_down)
+        self.skin_left = PhotoImage(file=file_left)
+        self.skin_right = PhotoImage(file=file_right)
 
         self.create()
 
