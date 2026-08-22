@@ -33,15 +33,16 @@ class tank:
         self.skin_left = PhotoImage(file=file_left)
         self.skin_right = PhotoImage(file=file_right)
 
-        self.create()
+        self.__create()
 
     def __str__(self):
         return f'x={self.x} y={self.y} ammo={self.ammo}'
 
-    def create(self): # Метод отрисовки квадрата танка
-        self.id = self.canvas.create_rectangle(self.x, self.y, self.x + tank.SIZE, self.y + tank.SIZE)
-
-    def repaint(self): # Метод перерисовки танка
+    def __create(self): # Метод отрисовки квадрата танка
+        #self.id = self.canvas.create_rectangle(self.x, self.y, self.x + tank.SIZE, self.y + tank.SIZE)
+        self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin_up,ancor='nw')
+    
+    def __repaint(self): # Метод перерисовки танка
         self.canvas.moveto(self.id, x=self.x, y=self.y)
 
     def show_info(self):
@@ -57,25 +58,29 @@ class tank:
             self.y -= self.speed
             self.__update_hitbox()
             self.fuel -= 1
-            self.repaint()
+            self.__canvas.itemconfig(self.__id,image=self.skin_up)
+            self.__repaint()
 
     def backward(self):
         if self.fuel > 0:
             self.y += self.speed
             self.fuel -= 1
-            self.repaint()
+            self.__canvas.itemconfig(self.__id,image=self.skin_down)
+            self.__repaint()
 
     def left(self):
         if self.fuel > 0:
             self.x -= self.speed
             self.fuel -= 1
-            self.repaint()
+            self.__canvas.itemconfig(self.__id,image=self.skin_left)
+            self.__repaint()
 
     def right(self):
         if self.fuel > 0:
             self.x += self.speed
             self.fuel -= 1
-            self.repaint()
+            self.__canvas.itemconfig(self.__id,image=self.skin_right)
+            self.__repaint()
 
     def __update_hitbox(self):
         self.__hitbox.moveto(self.x,self.y)
