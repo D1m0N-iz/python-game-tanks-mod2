@@ -11,7 +11,7 @@ class tank:
                   file_left = './img/tank_left.png',
                   file_right = './img/tank_right.png'):
         tank.count += 1
-        self.__hitbox = Hitbox(x,y,tank.SIZE,tank.SIZE)
+        self.__hitbox = Hitbox(x,y,self.get_size)
         self.canvas = canvas
         self.model = model
         self.fuel = 1000 # Запас топлива
@@ -112,10 +112,9 @@ class tank:
     def get_speed(self):
         return self.__speed
     
+    def get_size(self):
+        return self.__skin_up.width()
+    
     @staticmethod
     def get_quantity():
         return Tank.count
-    
-    @staticmethod
-    def get_size():
-        return Tank.SIZE
