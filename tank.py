@@ -6,19 +6,21 @@ class tank:
     SIZE = 100
 
     def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12,
-                 file_up = './img/tank_up.png'
+                 file_up = './img/tank_up.png',
                   file_down = './img/tank_down.png',
                   file_left = './img/tank_left.png',
                   file_right = './img/tank_right.png'):
         tank.count += 1
-        self.__hitbox = Hitbox(x,y,self.get_size)
         self.canvas = canvas
         self.model = model
-        self.fuel = 1000 # Запас топлива
+        self.fuel = 10000 # Запас топлива
         self.hp = 100
         self.xp = 0
         self.ammo = ammo
         self.speed = speed
+
+        self.__vx = 0
+        self.__vy = 0
 
         self.__x = x
         self.__y = y
@@ -33,6 +35,8 @@ class tank:
         self.skin_left = PhotoImage(file=file_left)
         self.skin_right = PhotoImage(file=file_right)
 
+        self.__hitbox = Hitbox(x,y,self.get_size(),get_size())
+
         self.__create()
 
     def __str__(self):
@@ -42,11 +46,19 @@ class tank:
         #self.id = self.canvas.create_rectangle(self.x, self.y, self.x + tank.SIZE, self.y + tank.SIZE)
         self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin_up,ancor='nw')
     
+    def show_info(self):
+        print(f'x={self.x},y={self.y},ammo={self.ammo}',)
+
     def __repaint(self): # Метод перерисовки танка
         self.canvas.moveto(self.id, x=self.x, y=self.y)
 
-    def show_info(self):
-        print(f'x={self.x},y={self.y},ammo={self.ammo}',)
+    def update(self):
+        if self.__fuel >- self.__speed:
+            self.__x  += self.__vx + self.__speed
+            self.__y  += self.__vy + self.__speed
+            self.__fuel -= self.__speed
+            self.__update_hitbox()
+            self.__repaint()
 
     def fire(self):
         if self.ammo > 0:
@@ -54,33 +66,28 @@ class tank:
             print('выстрел!!!')
 
     def forward(self):
-        if self.fuel > 0:
-            self.y -= self.speed
-            self.__update_hitbox()
-            self.fuel -= 1
-            self.__canvas.itemconfig(self.__id,image=self.skin_up)
-            self.__repaint()
+        self.__vx = 0
+        self.__vy = -1
+        self.canavas.itemconfig(self.__id,image = self.__skin_up)
 
+        
     def backward(self):
-        if self.fuel > 0:
-            self.y += self.speed
-            self.fuel -= 1
-            self.__canvas.itemconfig(self.__id,image=self.skin_down)
-            self.__repaint()
+        self.__vx = 0
+        self.__vy = 1
+        self.canavas.itemconfig(self.__id,image = self.__skin_down)
 
     def left(self):
-        if self.fuel > 0:
-            self.x -= self.speed
-            self.fuel -= 1
-            self.__canvas.itemconfig(self.__id,image=self.skin_left)
-            self.__repaint()
+        self.__vx = 0
+        self.__vy = -1
+        self.canavas.itemconfig(self.__id,image = self.__skin_left)
 
     def right(self):
-        if self.fuel > 0:
-            self.x += self.speed
-            self.fuel -= 1
-            self.__canvas.itemconfig(self.__id,image=self.skin_right)
-            self.__repaint()
+        self.__vx = 0
+        self.__vy = 1
+        self.canavas.itemconfig(self.__id,image = self.__skin_right)
+
+    def stop(self):
+        self.__vx = self.__vy = 0
 
     def __update_hitbox(self):
         self.__hitbox.moveto(self.x,self.y)
