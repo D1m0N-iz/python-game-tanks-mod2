@@ -6,9 +6,9 @@ hb1 = Hitbox(0,0,100,100)
 hb2 = Hitbox(50,50,100,100)
 hb3 = Hitbox(170,50,50,50)
 
-print(hb1.intersects(hb2))
-print(hb1.intersects(hb3))
-print(hb2.intersects(hb3))
+# print(hb1.intersects(hb2))
+# print(hb1.intersects(hb3))
+# print(hb2.intersects(hb3))
 
 # Коды клавиш
 KEY_W_1, KEY_A_1, KEY_S_1, KEY_D_1 = 87, 65, 83, 68 # Кодировка ASCII

@@ -21,14 +21,16 @@ class tank:
 
         self.__vx = 0
         self.__vy = 0
+        self.dx = 0
+        self.dy = 0
 
         self.__x = x
         self.__y = y
 
-        if self.x < 0:
-            self.x = 0
-        if self.y < 0:
-            self.y = 0
+        if tank.x < 0:
+            tank.x = 0
+        if tank.y < 0:
+            tank.y = 0
 
         self.skin_up = PhotoImage(file=file_up)
         self.skin_down = PhotoImage(file=file_down)
@@ -54,12 +56,21 @@ class tank:
 
     def update(self):
         if self.__fuel >- self.__speed:
-            self.__x  += self.__vx + self.__speed
-            self.__y  += self.__vy + self.__speed
+            self.__dx  = self.__vx + self.__speed
+            self.__dy  = self.__vy + self.__speed
             self.__fuel -= self.__speed
+            self.__x += self.__dx
+            self.__y += self.__dy
             self.__update_hitbox()
             self.__repaint()
 
+    def undo_move(self):
+        self.__x -=self.__dx
+        self.__y -=self.__dy
+        self.__fuel += self.__speed
+        self.__update_hitbox()
+        self.__repaint()
+   
     def fire(self):
         if self.ammo > 0:
             self.ammo -= 1

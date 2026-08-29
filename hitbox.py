@@ -2,25 +2,28 @@ class Hitbox:
     def __init__(self,x,y,width,height):
         self.__x = x
         self.__y = y
-        self.set_width(width)
-        self.set_height(height)
+        self.__set_width(width)
+        self.__set_height(height)
 
     def __str__(self):
         return f'__x={self.__x} __y={self.__y} __width={self.__widht} __height={self.__height}'
 
-    def __get_widht(self):
-        return self.__widht
-    def __set_width(self,width):
+    def __get_width(self):
+        return self.__width
+    
+    def __set_width(self, width):
         if width < 0:
             width = -width
-        self.__widht = width
-
-    def ___get_height(self):
+        self.__width = width
+    
+    def __get_height(self):
         return self.__height
-    def __set_height(self,height):
+    
+    def __set_height(self, height):
         if height < 0:
             height = -height
         self.__height = height
+
 
     def __get_top(self):
          return self.__y
@@ -32,7 +35,7 @@ class Hitbox:
          return self.__x
 
     def __get_right(self):
-         return self.__x + self.__widht
+         return self.__x + self.__width
 
     def __get_x(self):
         return self.__x
@@ -66,8 +69,8 @@ class Hitbox:
         
     x = property(__get_x,__set_x)
     y = property(__get_y,__set_y)
-    width = property(__get_widht,__set_width)
-    height = property(___get_height,__set_height)
+    width = property(__get_width,__set_width)
+    height = property(__get_height,__set_height)
 
     left = property(__get_left)
     right = property(__get_right)
