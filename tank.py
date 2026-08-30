@@ -1,11 +1,13 @@
 from tkinter import PhotoImage
 from hitbox import Hitbox
 
+from random import randint
+
 class tank:
     count = 0
     SIZE = 100
 
-    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=12,
+    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=1,
                  file_up = './img/tank_up.png',
                   file_down = './img/tank_down.png',
                   file_left = './img/tank_left.png',
@@ -37,7 +39,7 @@ class tank:
         self.skin_left = PhotoImage(file=file_left)
         self.skin_right = PhotoImage(file=file_right)
 
-        self.__hitbox = Hitbox(x,y,self.get_size(),get_size())
+        self.__hitbox = Hitbox(x,y,self.get_size(),self.get_size(),padding=8)
 
         self.__create()
 
@@ -54,8 +56,22 @@ class tank:
     def __repaint(self): # Метод перерисовки танка
         self.canvas.moveto(self.id, x=self.x, y=self.y)
 
+    def AI(self):
+        if randint(1,30) == 1:
+            self.AI_change_orientation
+
+    def AI_change_orientation(self):
+        rand = randint(0-3)
+        match rand:
+            case 0:self.left()
+            case 1:self.farward()
+            case 2:self.right()
+            case 3:self.backward()
+
     def update(self):
         if self.__fuel >- self.__speed:
+            if self.__bot:
+                self.__AI()
             self.__dx  = self.__vx + self.__speed
             self.__dy  = self.__vy + self.__speed
             self.__fuel -= self.__speed

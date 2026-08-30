@@ -19,6 +19,7 @@ FPS = 60
 
 def update():
     player.update()
+    enemy.update()
     check_colision()
     w.after(1000//FPS,update)
 
@@ -33,11 +34,13 @@ def key_press(event):
         player.right()
     elif event.keycode == KEY_CTRL_L:
         player.stop()
-        
 
 def check_colision():
     if player.intersects(enemy):
-        print('танки столкнулись')
+        #print('танки столкнулись')
+        player.undo_move()
+    if enemy.intersects(player):
+        enemy.undo_move()
 
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
