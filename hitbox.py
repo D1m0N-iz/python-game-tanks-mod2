@@ -2,8 +2,8 @@ class Hitbox:
     def __init__(self,x,y,width,height):
         self.__x = x
         self.__y = y
-        self.set_width(width)
-        self.set_height(height)
+        self.__set_width(width)
+        self.___set_height(height)
 
     def __str__(self):
         return f'__x={self.__x} __y={self.__y} __width={self.__widht} __height={self.__height}'
