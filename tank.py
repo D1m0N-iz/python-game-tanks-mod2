@@ -42,7 +42,6 @@ class tank:
         self.skin_left = PhotoImage(file=file_left)
         self.skin_right = PhotoImage(file=file_right)
 
-
         self.__hitbox = Hitbox(x,y,self.get_size(),self.get_size(),padding=8)
 
         self.__create()
@@ -51,7 +50,6 @@ class tank:
         return f'x={self.x} y={self.y} ammo={self.ammo}'
 
     def __create(self): # Метод отрисовки квадрата танка
-        #self.id = self.canvas.create_rectangle(self.x, self.y, self.x + tank.SIZE, self.y + tank.SIZE)
         self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin_up,ancor='nw')
     
     def show_info(self):
@@ -62,9 +60,12 @@ class tank:
 
     def AI(self):
         if randint(1,30) == 1:
+
             if self.__taerget is not None and randint(1,10) < 9:
                 self._AI_goto_target()
             self.AI_change_orientation()
+
+            self.AI_change_orientation
 
     def AI_change_orientation(self):
         rand = randint(0-3)
@@ -99,6 +100,8 @@ class tank:
             self.__repaint()
 
     def __undo_move(self):
+        if self.__dx == 0 and self.__dy:
+            return
         self.__x -=self.__dx
         self.__y -=self.__dy
         self.__fuel += self.__speed
