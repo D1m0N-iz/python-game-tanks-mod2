@@ -7,7 +7,7 @@ class tank:
     count = 0
     SIZE = 100
 
-    def __init__(self, canvas, x, y, model='ИС-2', ammo=30, speed=1,
+    def __init__(self,bot canvas, x, y, model='ИС-2', ammo=30, speed=1,
                  file_up = './img/tank_up.png',
                   file_down = './img/tank_down.png',
                   file_left = './img/tank_left.png',
@@ -15,14 +15,14 @@ class tank:
                   bot = True):
         tank.count += 1
         self.__bot = bot
-        self.__taerget = None
-        self.canvas = canvas
-        self.model = model
-        self.fuel = 10000 # Запас топлива
-        self.hp = 100
-        self.xp = 0
-        self.ammo = ammo
-        self.speed = speed
+        self.__target = None
+        self.__canvas = canavas
+        self.__model = model
+        self.__fuel = 10000 # Запас топлива
+        self.__hp = 100
+        self.__xp = 0
+        self.__mmo = ammo
+        self.__speed = speed
 
         self.__vx = 0
         self.__vy = 0
@@ -75,17 +75,17 @@ class tank:
             case 2:self.right()
             case 3:self.backward()
 
-    def _AI_goto_target(self):
-        if randint(1,2) == 1:
-            if self.__taerget.get_x() < self.get_x():
+    def __AI_goto_target(self):
+        if randint(1,2)==1:
+            if self.__target.get_x() < self.get_x():
                 self.left()
+            else:
+                self.right()
         else:
-            self.right()
-        if randint(1,2) == 2:
-            if self.__target.get_y() < self.get__y():
-                self.forward()
-        else:
-            self.backward()
+            if self.__target.get_y() < self.get_y():
+                self.forward
+            else:
+                self.backward()
 
     def update(self):
         if self.__fuel >- self.__speed:
@@ -179,5 +179,6 @@ class tank:
     def get_quantity():
         return Tank.count
 
-    def set_target(self,target):
+    def set set_target(self,target):
         self.__target = target
+
