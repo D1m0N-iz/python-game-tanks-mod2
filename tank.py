@@ -11,7 +11,8 @@ class tank:
                  file_up = './img/tank_up.png',
                   file_down = './img/tank_down.png',
                   file_left = './img/tank_left.png',
-                  file_right = './img/tank_right.png'):
+                  file_right = './img/tank_right.png',
+                  bot = True):
         tank.count += 1
         self.__bot = bot
         self.__target = None
@@ -49,7 +50,6 @@ class tank:
         return f'x={self.x} y={self.y} ammo={self.ammo}'
 
     def __create(self): # Метод отрисовки квадрата танка
-        #self.id = self.canvas.create_rectangle(self.x, self.y, self.x + tank.SIZE, self.y + tank.SIZE)
         self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin_up,ancor='nw')
     
     def show_info(self):
@@ -60,6 +60,11 @@ class tank:
 
     def AI(self):
         if randint(1,30) == 1:
+
+            if self.__taerget is not None and randint(1,10) < 9:
+                self._AI_goto_target()
+            self.AI_change_orientation()
+
             self.AI_change_orientation
 
     def AI_change_orientation(self):
@@ -94,7 +99,9 @@ class tank:
             self.__update_hitbox()
             self.__repaint()
 
-    def undo_move(self):
+    def __undo_move(self):
+        if self.__dx == 0 and self.__dy:
+            return
         self.__x -=self.__dx
         self.__y -=self.__dy
         self.__fuel += self.__speed
@@ -134,7 +141,12 @@ class tank:
         self.__hitbox.moveto(self.x,self.y)
 
     def intersects(self,other_tank):
-        return self.__hitbox.intersects(other_tank._hitbox)
+        value = self.__hitbox.intersects(other_tank._hitbox)
+        if value:
+            self.__undo_move
+            if self.__bot:
+                self.AI_change_orientation()
+        return value
     
     def get_x(self):
         return self.__x

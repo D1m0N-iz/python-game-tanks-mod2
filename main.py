@@ -2,8 +2,8 @@ import tkinter as tk
 from tank import tank
 from hitbox import Hitbox
 
-hb1 = Hitbox(0,0,100,100)
-hb2 = Hitbox(50,50,100,100)
+hb1 = Hitbox(x=0,y=0,width=100,height=100)
+hb2 = Hitbox(x=50,y=50,width=100,height=100)
 hb3 = Hitbox(170,50,50,50)
 
 # print(hb1.intersects(hb2))
@@ -36,6 +36,10 @@ def key_press(event):
         player.stop()
 
 def check_colision():
+
+    player.intersects(enemy)
+    enemy.intersects(player)
+
     if player.intersects(enemy):
         #print('танки столкнулись')
         player.undo_move()
@@ -48,30 +52,15 @@ canvas = tk.Canvas(w, width=800, height=600, bg="#6A6A6A") # Создаем хо
 canvas.pack() # Располагаем холст в окне
 
 player = tank(canvas=canvas, x=100, y=50,speed=1) # Танк игрока
+
+enemy = tank(canvas=canvas, x=500, y=150,speed=1) # Танк врага
+enemy.set_target(player)
+
 enemy = tank(canvas=canvas, x=500, y=150) # Танк врага
+
 
 w.bind('<KeyPress>', key_press)
 
 update()
 
 w.mainloop()
-
-# t1 = tank(x=0,y=0)
-
-# t2 = tank(x=100,y=200,model='tiger',ammo=25,)
-
-# t2.forward()
-# t2.forward()
-# t2.right()
-# t2.fire()
-
-
-# print (t1.ammo)
-# t1.fire()
-# print (t1.ammo)
-
-# print (tank.count)
-
-# for t in[t1,t2]:
-#     print(t.model)
-
