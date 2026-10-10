@@ -1,6 +1,7 @@
 import tkinter as tk
 from tank import tank
 from hitbox import Hitbox
+import world
 
 hb1 = Hitbox(x=0,y=0,width=100,height=100)
 hb2 = Hitbox(x=50,y=50,width=100,height=100)
@@ -21,6 +22,7 @@ def update():
     player.update()
     enemy.update()
     check_colision()
+
     w.after(1000//FPS,update)
 
 def key_press(event):
@@ -48,7 +50,7 @@ def check_colision():
 
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
-canvas = tk.Canvas(w, width=800, height=600, bg="#6A6A6A") # Создаем холст в окне
+canvas = tk.Canvas(w, width=world.WIDTH, height=world.HEIGHT, bg="#6A6A6A") # Создаем холст в окне
 canvas.pack() # Располагаем холст в окне
 
 player = tank(canvas=canvas, x=100, y=50,speed=1) # Танк игрока

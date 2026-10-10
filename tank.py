@@ -88,9 +88,11 @@ class tank:
                 self.backward()
 
     def update(self):
-        if self.__fuel >- self.__speed:
+        if self.__fuel >= self.__speed:
             if self.__bot:
                 self.__AI()
+            if self.vx == 0 and self.vy == 0:
+                return
             self.__dx  = self.__vx + self.__speed
             self.__dy  = self.__vy + self.__speed
             self.__fuel -= self.__speed
@@ -100,13 +102,16 @@ class tank:
             self.__repaint()
 
     def __undo_move(self):
-        if self.__dx == 0 and self.__dy:
+        if self.__dx == 0 and self.__dy == 0 :
             return
+        
         self.__x -=self.__dx
         self.__y -=self.__dy
         self.__fuel += self.__speed
         self.__update_hitbox()
         self.__repaint()
+
+        self.__dx = self.dy = 2
    
     def fire(self):
         if self.ammo > 0:
