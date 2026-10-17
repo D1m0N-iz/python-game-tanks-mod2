@@ -99,7 +99,17 @@ class tank:
             self.__x += self.__dx
             self.__y += self.__dy
             self.__update_hitbox()
+            self.__check_out_of_world()
             self.__repaint()
+
+    def __check_out_of_world(self):
+        if self.__hitbox.left < 0 or \
+                self.__hitbox.top < 0 or \
+                self.__hitbox.right > world.WIDTH or \
+                self.__hitbox.bottom >world.HEIGHT:
+            self.__undo_move()
+            if self.bot:
+                self.AI_change_orientation() 
 
     def __undo_move(self):
         if self.__dx == 0 and self.__dy == 0 :

@@ -50,7 +50,7 @@ def check_colision():
 
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
-canvas = tk.Canvas(w, width=world.WIDTH, height=world.HEIGHT, bg="#6A6A6A") # Создаем холст в окне
+canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A") # Создаем холст в окне
 canvas.pack() # Располагаем холст в окне
 
 player = tank(canvas=canvas, x=100, y=50,speed=1) # Танк игрока
