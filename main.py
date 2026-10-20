@@ -14,6 +14,7 @@ hb3 = Hitbox(170,50,50,50)
 # Коды клавиш
 KEY_W_1, KEY_A_1, KEY_S_1, KEY_D_1 = 87, 65, 83, 68 # Кодировка ASCII
 KEY_W_2, KEY_A_2, KEY_S_2, KEY_D_2 = 25, 38, 39, 40 # Кодировка Linux
+KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT = 38, 37, 40, 39
 KEY_CTRL_L = 17
 
 FPS = 60
@@ -36,6 +37,15 @@ def key_press(event):
         player.right()
     elif event.keycode == KEY_CTRL_L:
         player.stop()
+    elif event.keykode == KEY_UP:
+        world.move_camera(0,-5)
+    elif event.keycode == KEY_DOWN:
+        world.move_camera(0,5)
+    elif event.keykode == KEY_LEFT:
+        world.move_camera(5,0)
+    elif event.keycode == KEY_RIGHT:
+        world.move_camera(5,0)
+
 
 def check_colision():
 
@@ -50,6 +60,8 @@ def check_colision():
 
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
+w.resizable(False,False)
+
 canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A") # Создаем холст в окне
 canvas.pack() # Располагаем холст в окне
 

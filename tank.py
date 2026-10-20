@@ -56,7 +56,9 @@ class tank:
         print(f'x={self.x},y={self.y},ammo={self.ammo}',)
 
     def __repaint(self): # Метод перерисовки танка
-        self.canvas.moveto(self.id, x=self.x, y=self.y)
+        self.canvas.moveto(self.id,
+                            x=world_get_screen_x(self._x),
+                            y=world_get_screen_y(self._y)
 
     def AI(self):
         if randint(1,30) == 1:
