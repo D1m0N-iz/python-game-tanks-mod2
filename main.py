@@ -22,6 +22,9 @@ FPS = 60
 def update():
     player.update()
     enemy.update()
+
+    world.set_camera_xy(player.get_x() + player.get_size()//2 - world.SCREEN_WIDTH//2, 
+                player.get_y() + player.get_size()//2 - world.SCREEN_HEIGHT//2)
     check_colision()
 
     w.after(1000//FPS,update)
@@ -61,14 +64,8 @@ def check_colision():
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
 w.resizable(False,False)
-
-canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A") # Создаем холст в окне
-canvas.pack() # Располагаем холст в окне
-
-player = tank(canvas=canvas, x=100, y=50,speed=1) # Танк игрока
-
-enemy = tank(canvas=canvas, x=500, y=150,speed=1) # Танк врага
-enemy.set_target(player)
+canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A")
+canvas.pack() 
 
 enemy = tank(canvas=canvas, x=500, y=150) # Танк врага
 

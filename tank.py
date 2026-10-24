@@ -93,16 +93,15 @@ class tank:
         if self.__fuel >= self.__speed:
             if self.__bot:
                 self.__AI()
-            if self.vx == 0 and self.vy == 0:
-                return
+            if not(self.vx == 0 and self.vy == 0):
+                self.__fuel -= self.__speed
             self.__dx  = self.__vx + self.__speed
             self.__dy  = self.__vy + self.__speed
-            self.__fuel -= self.__speed
             self.__x += self.__dx
             self.__y += self.__dy
             self.__update_hitbox()
             self.__check_out_of_world()
-            self.__repaint()
+        self.__repaint()
 
     def __check_out_of_world(self):
         if self.__hitbox.left < 0 or \
