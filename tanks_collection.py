@@ -20,3 +20,11 @@ def get_player():
 def update():
     for tank in _tanks:
         tank.update()
+        check_collision(tank)
+
+def check_collision(tank):
+    for other_tank in _tanks:
+        if tank == other_tank:
+            continue
+        if tank.intersects(other_tank):
+            return

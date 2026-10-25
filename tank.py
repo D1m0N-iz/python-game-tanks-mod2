@@ -195,6 +195,5 @@ class tank:
     def get_quantity():
         return Tank.count
 
-    def set set_target(self,target):
+    def set_target(self,target):
         self.__target = target
-

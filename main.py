@@ -2,6 +2,7 @@ import tkinter as tk
 from tank import tank
 from hitbox import Hitbox
 import world
+import tanks_collection
 
 hb1 = Hitbox(x=0,y=0,width=100,height=100)
 hb2 = Hitbox(x=50,y=50,width=100,height=100)
@@ -20,12 +21,10 @@ KEY_CTRL_L = 17
 FPS = 60
 
 def update():
-    player.update()
-    enemy.update()
+    tanks_collection.update()
 
     world.set_camera_xy(player.get_x() + player.get_size()//2 - world.SCREEN_WIDTH//2, 
-                player.get_y() + player.get_size()//2 - world.SCREEN_HEIGHT//2)
-    check_colision()
+                        player.get_y() + player.get_size()//2 - world.SCREEN_HEIGHT//2)
 
     w.after(1000//FPS,update)
 
@@ -49,29 +48,19 @@ def key_press(event):
     elif event.keycode == KEY_RIGHT:
         world.move_camera(5,0)
 
-
-def check_colision():
-
-    player.intersects(enemy)
-    enemy.intersects(player)
-
-    if player.intersects(enemy):
-        #print('танки столкнулись')
-        player.undo_move()
-    if enemy.intersects(player):
-        enemy.undo_move()
-
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
 w.resizable(False,False)
+
 canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A")
 canvas.pack() 
 
 enemy = tank(canvas=canvas, x=500, y=150) # Танк врага
 
+tanks_collection.initialize(canvas)
+player = tanks_collection.get_player()
 
 w.bind('<KeyPress>', key_press)
 
 update()
-
 w.mainloop()
