@@ -27,4 +27,11 @@ def check_collision(tank):
         if tank == other_tank:
             continue
         if tank.intersects(other_tank):
-            return
+            return    
+
+def spawn_enemy():
+    pos_x = randint(200,world.WIDTH - 200)
+    pos_y = randint(200,world.HEIGHT - 200)
+    t = tank(_canvas, pos_x,pos_y)
+    t.set_target(get_player)
+    _tanks.append(t)
