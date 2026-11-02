@@ -3,6 +3,7 @@ from tank import tank
 from hitbox import Hitbox
 import world
 import tanks_collection
+import texture
 
 hb1 = Hitbox(x=0,y=0,width=100,height=100)
 hb2 = Hitbox(x=50,y=50,width=100,height=100)
@@ -51,9 +52,17 @@ def key_press(event):
     elif event.keycode == KEY_SPACE:
         tanks_collection.spawn_enemy()
 
+def load_textures():
+    texture.load('tank_up', './img/tank_up.png')
+    texture.load('tank_down', './img/tank_down.png')
+    texture.load('tank_left', './img/tank_left.png')
+    texture.load('tank_right', './img/tank_right.png')
+
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
 w.resizable(False,False)
+
+load_textures()
 
 canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A")
 canvas.pack() 

@@ -23,5 +23,5 @@ def set_camera_xy(x,y):
 _change_x = _camera_y = 0
 SCREEN_WIDTH, SCREEN_HEIGHT = 800,600
 
-WIDTH = SCREEN_WIDTH * 6
-HEIGHT = SCREEN_HEIGHT * 4
+WIDTH = SCREEN_WIDTH * 2
+HEIGHT = SCREEN_HEIGHT * 2

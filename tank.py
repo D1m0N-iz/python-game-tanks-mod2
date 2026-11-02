@@ -1,28 +1,24 @@
 from tkinter import PhotoImage
 from hitbox import Hitbox
-
+from main import canvas
 from random import randint
+import texture as skin
 
 class tank:
     count = 0
     SIZE = 100
 
-    def __init__(self,bot canvas, x, y, model='ИС-2', ammo=30, speed=1,
-                 file_up = './img/tank_up.png',
-                  file_down = './img/tank_down.png',
-                  file_left = './img/tank_left.png',
-                  file_right = './img/tank_right.png',
-                  bot = True):
+    def __init__(self,bot canvas, x, y, model, ammo, speed=,bot = True):
         tank.count += 1
         self.__bot = bot
         self.__target = None
-        self.__canvas = canavas
-        self.__model = model
+        self.__canvas = canvas
         self.__fuel = 10000 # Запас топлива
         self.__hp = 100
         self.__xp = 0
-        self.__mmo = ammo
-        self.__speed = speed
+        self.__ammo = 30
+        self.__model = "ис-2"
+        self.__speed = 1
 
         self.__vx = 0
         self.__vy = 0
@@ -37,11 +33,6 @@ class tank:
         if tank.y < 0:
             tank.y = 0
 
-        self.skin_up = PhotoImage(file=file_up)
-        self.skin_down = PhotoImage(file=file_down)
-        self.skin_left = PhotoImage(file=file_left)
-        self.skin_right = PhotoImage(file=file_right)
-
         self.__hitbox = Hitbox(x,y,self.get_size(),self.get_size(),padding=8)
 
         self.__create()
@@ -50,7 +41,7 @@ class tank:
         return f'x={self.x} y={self.y} ammo={self.ammo}'
 
     def __create(self): # Метод отрисовки квадрата танка
-        self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin_up,ancor='nw')
+        self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin.get('tank_up'),ancor='nw')
     
     def show_info(self):
         print(f'x={self.x},y={self.y},ammo={self.ammo}',)
@@ -58,7 +49,7 @@ class tank:
     def __repaint(self): # Метод перерисовки танка
         self.canvas.moveto(self.id,
                             x=world_get_screen_x(self._x),
-                            y=world_get_screen_y(self._y)
+                            y=world_get_screen_y(self._y))
 
     def AI(self):
         if randint(1,30) == 1:
@@ -132,23 +123,23 @@ class tank:
     def forward(self):
         self.__vx = 0
         self.__vy = -1
-        self.canavas.itemconfig(self.__id,image = self.__skin_up)
+        self.canavas.itemconfig(self.__id,image = skin.get('tank_up'))
 
         
     def backward(self):
         self.__vx = 0
         self.__vy = 1
-        self.canavas.itemconfig(self.__id,image = self.__skin_down)
+        self.canavas.itemconfig(self.__id,image = skin.get('tank_down'))
 
     def left(self):
         self.__vx = 0
         self.__vy = -1
-        self.canavas.itemconfig(self.__id,image = self.__skin_left)
+        self.canavas.itemconfig(self.__id,image = skin.get('tank_left'))
 
     def right(self):
         self.__vx = 0
         self.__vy = 1
-        self.canavas.itemconfig(self.__id,image = self.__skin_right)
+        self.canavas.itemconfig(self.__id,image = skin.get('tank_right'))
 
     def stop(self):
         self.__vx = self.__vy = 0
@@ -189,7 +180,7 @@ class tank:
         return self.__speed
     
     def get_size(self):
-        return self.__skin_up.width()
+        return skin.get('tank_up').width()
     
     @staticmethod
     def get_quantity():
