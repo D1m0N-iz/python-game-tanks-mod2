@@ -1,3 +1,9 @@
+import texture
+
+def initialize(canvas):
+    global _canvas
+    _canvas = canvas
+
 def set_camera_xy(x,y):
     global _change_x,_camera_y
     if x < 0:
@@ -25,3 +31,17 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 800,600
 
 WIDTH = SCREEN_WIDTH * 2
 HEIGHT = SCREEN_HEIGHT * 2
+
+GROUND = 'g'
+WATER = 'w'
+CONCRETE = 'c'
+BRICK = 'b'
+
+_canvas = None
+
+class _Cell:
+    def __init__(self,canvas,block,x,y):
+        self.__canvas__ = canvas
+        self.__block = block
+        self.__x = x
+        self.__y = y

@@ -1,5 +1,5 @@
 import tkinter as tk
-from tank import tank
+from tank import Tank
 from hitbox import Hitbox
 import world
 import tanks_collection
@@ -58,6 +58,10 @@ def load_textures():
     texture.load('tank_left', './img/tank_left.png')
     texture.load('tank_right', './img/tank_right.png')
 
+    texture.load('b','./img/brick.png')
+    texture.load('w','./img/water.png')
+    texture.load('c','./img/wall.png')
+
 w = tk.Tk() # Создаем объект окна
 w.title('Танки на минималках 2.0') # Заголовок окна
 w.resizable(False,False)
@@ -67,8 +71,7 @@ load_textures()
 canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A")
 canvas.pack() 
 
-enemy = tank(canvas=canvas, x=500, y=150) # Танк врага
-
+world.initialize(canvas)
 tanks_collection.initialize(canvas)
 player = tanks_collection.get_player()
 

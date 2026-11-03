@@ -4,12 +4,12 @@ from main import canvas
 from random import randint
 import texture as skin
 
-class tank:
+class Tank:
     count = 0
     SIZE = 100
 
-    def __init__(self,bot canvas, x, y, model, ammo, speed=,bot = True):
-        tank.count += 1
+    def __init__(self, canvas, x, y, model, ammo, speed,bot = True):
+        Tank.count += 1
         self.__bot = bot
         self.__target = None
         self.__canvas = canvas
@@ -28,10 +28,10 @@ class tank:
         self.__x = x
         self.__y = y
 
-        if tank.x < 0:
-            tank.x = 0
-        if tank.y < 0:
-            tank.y = 0
+        if Tank.x < 0:
+            Tank.x = 0
+        if Tank.y < 0:
+            Tank.y = 0
 
         self.__hitbox = Hitbox(x,y,self.get_size(),self.get_size(),padding=8)
 
@@ -39,6 +39,12 @@ class tank:
 
     def __str__(self):
         return f'x={self.x} y={self.y} ammo={self.ammo}'
+
+    def __del__(self):
+        try:
+            self.__canvas.delete(self.__id)
+        except Exception:
+            pass
 
     def __create(self): # Метод отрисовки квадрата танка
         self.__id = self.canvas.create_image(self.__x,self.__y,image=self.__skin.get('tank_up'),ancor='nw')
@@ -48,8 +54,8 @@ class tank:
 
     def __repaint(self): # Метод перерисовки танка
         self.canvas.moveto(self.id,
-                            x=world_get_screen_x(self._x),
-                            y=world_get_screen_y(self._y))
+                            x = world_get_screen_x(self._x),
+                            y = world_get_screen_y(self._y))
 
     def AI(self):
         if randint(1,30) == 1:
