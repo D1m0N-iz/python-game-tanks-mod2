@@ -1,8 +1,17 @@
 import texture
 
 def initialize(canvas):
-    global _canvas
+    global _canvas,_map
     _canvas = canvas
+
+    create_map(20,20)
+
+def create_map(row=20,cals=20):
+    global map
+
+    # _map.append = _Cell(canvas,BRICK,0,0)
+    # _map.append = _Cell(canvas,WATER,0,BLOCK_SIZE * 1)
+    # _map.append = _Cell(canvas,CONCRETE,0,BLOCK_SIZE * 2)
 
 def set_camera_xy(x,y):
     global _change_x,_camera_y
@@ -36,8 +45,10 @@ GROUND = 'g'
 WATER = 'w'
 CONCRETE = 'c'
 BRICK = 'b'
+BLOCK_SIZE = 64
 
 _canvas = None
+_map = []
 
 class _Cell:
     def __init__(self,canvas,block,x,y):
@@ -45,3 +56,20 @@ class _Cell:
         self.__block = block
         self.__x = x
         self.__y = y
+
+        self.__create_element(block)
+
+    def __del__(self):
+        try:
+            self.__canvas.delete(self.__id)
+        except Exception:
+            pass
+
+    def __create_element(self, block):
+        if block != GROUND:
+            self.__id = self.__canvas.create_image(
+                self.__x, self.__y,
+                image=texture.get(block), anchor='nw')
+
+    def get_block(self):
+        return self.__block
