@@ -7,7 +7,17 @@ def initialize(canvas):
     create_map(20,20)
 
 def create_map(row=20,cals=20):
-    global map
+    global _map
+
+    for i in range(rows):
+        row = []
+        for j in range(cols):
+            block = GROUND
+            if i == 0 or j == 0 or i == rows - 1 or j == cols - 1:
+                block = CONCRETE    
+            coll = _Cell(canvas,block,j + BLOCK_SIZE,i + BLOCK_SIZE)
+            row.append(cell)
+        _map.append(row)
 
     # _map.append = _Cell(canvas,BRICK,0,0)
     # _map.append = _Cell(canvas,WATER,0,BLOCK_SIZE * 1)

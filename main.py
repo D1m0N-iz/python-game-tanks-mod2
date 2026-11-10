@@ -68,7 +68,7 @@ w.resizable(False,False)
 
 load_textures()
 
-canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#6A6A6A")
+canvas = tk.Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg="#00A000")
 canvas.pack() 
 
 world.initialize(canvas)
