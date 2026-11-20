@@ -1,5 +1,5 @@
 import tkinter as tk
-from tank import Tank
+from tank import Tanks
 from hitbox import Hitbox
 import world
 import tanks_collection

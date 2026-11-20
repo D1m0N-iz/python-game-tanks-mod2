@@ -1,3 +1,5 @@
+from random import randint,choise
+
 import texture
 
 def initialize(canvas):
@@ -9,12 +11,26 @@ def initialize(canvas):
 def create_map(row=20,cals=20):
     global _map
 
+def get_rows():
+    return len(_map)
+
+def get_cols():
+    return len(_map[0])
+
+def get_width():
+    return BLOCK_SIZE * get_cols
+
+def get_height():
+    return BLOCK_SIZE * get_rows
+
     for i in range(rows):
         row = []
         for j in range(cols):
             block = GROUND
             if i == 0 or j == 0 or i == rows - 1 or j == cols - 1:
                 block = CONCRETE    
+            elif randint(1,100) > 85:
+                block = choise([BRICK,WATER,CONCRETE])
             coll = _Cell(canvas,block,j + BLOCK_SIZE,i + BLOCK_SIZE)
             row.append(cell)
         _map.append(row)

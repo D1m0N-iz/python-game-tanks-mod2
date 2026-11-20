@@ -4,12 +4,12 @@ from main import canvas
 from random import randint
 import texture as skin
 
-class Tank:
+class Tanks:
     count = 0
     SIZE = 100
 
     def __init__(self, canvas, x, y, model, ammo, speed,bot = True):
-        Tank.count += 1
+        Tanks.count += 1
         self.__bot = bot
         self.__target = None
         self.__canvas = canvas
@@ -28,10 +28,10 @@ class Tank:
         self.__x = x
         self.__y = y
 
-        if Tank.x < 0:
-            Tank.x = 0
-        if Tank.y < 0:
-            Tank.y = 0
+        if Tanks.x < 0:
+            Tanks.x = 0
+        if Tanks.y < 0:
+            Tanks.y = 0
 
         self.__hitbox = Hitbox(x,y,self.get_size(),self.get_size(),padding=8)
 
@@ -190,7 +190,7 @@ class Tank:
     
     @staticmethod
     def get_quantity():
-        return Tank.count
+        return Tanks.count
 
     def set_target(self,target):
         self.__target = target
